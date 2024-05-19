@@ -17,7 +17,11 @@ const config = {
 		)
 	],
 	theme: {
-		extend: {},
+		extend: {
+			backgroundImage: {
+				'background-image': "url('/src/lib/assets/bg-blue.jpg')",
+			   }
+		},
 	},
   plugins: [
     skeleton({
