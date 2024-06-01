@@ -3,7 +3,7 @@
   import { AppBar } from '@skeletonlabs/skeleton';
 </script>
 
-<div class="bg-background-image bg-cover">
+<div >
 <AppBar class="!bg-transparent">
 <svelte:fragment slot="lead">(icon)</svelte:fragment>
 (title)

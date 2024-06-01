@@ -18,14 +18,15 @@ const config = {
 	],
 	theme: {
 		extend: {
-			backgroundImage: {
-				'background-image': "url('/src/lib/assets/bg-blue.jpg')",
-			   }
 		},
 	},
 	plugins: [
-		// 4. Append the Skeleton plugin (after other plugins)
-		skeleton
+		skeleton({
+			themes: {
+				// Register each theme within this array:
+				preset: [ "sahara" ] 
+			}
+		})
 	]
 } satisfies Config;
 
