@@ -5,6 +5,6 @@ const config = {
   kit: {
     adapter: adapter()
   },
-  preprocess: vitePreprocess(), typescript: true
+  preprocess: vitePreprocess()
 };
 export default config;
