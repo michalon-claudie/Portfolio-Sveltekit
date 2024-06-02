@@ -5,6 +5,7 @@
 	import ImageSlider2 from '$lib/assets/alligator.webp'
 	import ImageSlider3 from '$lib/assets/bg-blue.jpg'
 	const images = [Imageslider, ImageSlider2, ImageSlider3];
+	import Cards from '$lib/Components/Cards.svelte'
   
 	function nextSlide() {
 	  if (!transitioning) {
@@ -22,12 +23,12 @@
 	  }
 	}
   </script>
-  
+
   <div class="relative w-full overflow-hidden flex h-56">
 	<div class="flex transition-transform duration-500" style="transform: translateX(-{currentIndex * 100}%);">
-	  {#each images as image}
+	  {#each images as img}
 		<div class="w-full flex-shrink-0">
-		  <img src={image} alt="Carousel Image" class="w-full object-cover" />
+		  <Cards pictureCards={img}/>
 		</div>
 	  {/each}
 	</div>
