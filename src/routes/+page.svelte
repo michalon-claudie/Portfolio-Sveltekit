@@ -1,43 +1,45 @@
-<script lang='ts'>
-	let currentIndex = 0;
-	let transitioning = false;
+<script lang="ts">
 	import Imageslider from '$lib/assets/alliMobile.webp'  
 	import ImageSlider2 from '$lib/assets/alligator.webp'
 	import ImageSlider3 from '$lib/assets/bg-blue.jpg'
 	const images = [Imageslider, ImageSlider2, ImageSlider3];
 	import Cards from '$lib/Components/Cards.svelte'
-  
-	function nextSlide() {
-	  if (!transitioning) {
-		transitioning = true;
-		currentIndex = (currentIndex + 1) % images.length;
-		setTimeout(() => transitioning = false, 500); 
-	  }
-	}
-  
-	function prevSlide() {
-	  if (!transitioning) {
-		transitioning = true;
-		currentIndex = (currentIndex - 1 + images.length) % images.length;
-		setTimeout(() => transitioning = false, 500); 
-	  }
-	}
-  </script>
 
-  <div class="relative w-full overflow-hidden flex h-56">
-	<div class="flex transition-transform duration-500" style="transform: translateX(-{currentIndex * 100}%);">
-	  {#each images as img}
-		<div class="w-full flex-shrink-0">
-		  <Cards pictureCards={img}/>
-		</div>
-	  {/each}
+	let elemCarousel: HTMLDivElement;
+	
+function carouselLeft(): void {
+	const x =
+		elemCarousel.scrollLeft === 0
+			? elemCarousel.clientWidth * elemCarousel.childElementCount // loop
+			: elemCarousel.scrollLeft - elemCarousel.clientWidth; // step left
+	elemCarousel.scroll(x, 0);
+}
+
+function carouselRight(): void {
+	const x =
+		elemCarousel.scrollLeft === elemCarousel.scrollWidth - elemCarousel.clientWidth
+			? 0 // loop
+			: elemCarousel.scrollLeft + elemCarousel.clientWidth; // step right
+	elemCarousel.scroll(x, 0);
+}
+					
+</script>
+
+<div class="card p-4 grid grid-cols-[auto_1fr_auto] gap-4 items-center">
+	<!-- Button: Left -->
+	<button type="button" class="btn-icon variant-filled" on:click={carouselLeft}>
+		<i class="fa-solid fa-arrow-left" />
+	</button>
+	<!-- Full Images -->
+	<div bind:this={elemCarousel} class="snap-x snap-mandatory scroll-smooth flex overflow-x-auto">
+		{#each images as img}
+			<Cards pictureCards={img}/>
+		{/each}
 	</div>
-	<button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2" on:click={prevSlide}>
-	  &#10094;
+	<!-- Button: Right -->
+	<button type="button" class="btn-icon variant-filled" on:click={carouselRight}>
+		<i class="fa-solid fa-arrow-right" />
 	</button>
-	<button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2" on:click={nextSlide}>
-	  &#10095;
-	</button>
-  </div>
-  
+</div>
+
 

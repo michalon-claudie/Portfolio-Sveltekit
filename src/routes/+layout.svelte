@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import "../app.pcss";
   import { AppBar } from '@skeletonlabs/skeleton';
   import { AppShell } from '@skeletonlabs/skeleton';
