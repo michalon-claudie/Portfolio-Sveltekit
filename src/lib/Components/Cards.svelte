@@ -2,6 +2,6 @@
     export let pictureCards='';
 </script>
 
-<div class="flex justify-center p-4">
+<div class="flex justify-center">
     <img src={pictureCards} alt="picture slider" class="w-full object-cover">
 </div>

@@ -6,7 +6,7 @@
 
 <AppShell class="bg-primary-300">
 	<svelte:fragment slot="header">
-    <AppBar class="bg-gradient-to-r from-primary-400 to-secondary-300">
+    <AppBar class="bg-gradient-to-b from-secondary-300 to-primary-300">
       <svelte:fragment slot="lead">(icon)</svelte:fragment>
       (title)
       <svelte:fragment slot="trail">(actions)</svelte:fragment>
