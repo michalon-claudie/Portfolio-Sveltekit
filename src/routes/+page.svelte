@@ -1,14 +1,42 @@
-<script lang="ts">
-import Imageslider from '$lib/assets/alliMobile.webp'  
-import ImageSlider2 from '$lib/assets/alligator.webp'
-import ImageSlider3 from '$lib/assets/bg-blue.jpg'	
-import Cards from '$lib/Components/Cards.svelte'
-const slideCarousel=[Imageslider,ImageSlider2,ImageSlider3];
-</script>
-
-<div class="snap-x scroll-px-4 snap-mandatory scroll-smooth flex gap-4 overflow-x-auto px-4 py-10">
-	{#each slideCarousel as img}
-		<Cards pictureCards={img}/>
-	{/each}
-</div>
+<script lang='ts'>
+	let currentIndex = 0;
+	let transitioning = false;
+	import Imageslider from '$lib/assets/alliMobile.webp'  
+	import ImageSlider2 from '$lib/assets/alligator.webp'
+	import ImageSlider3 from '$lib/assets/bg-blue.jpg'
+	const images = [Imageslider, ImageSlider2, ImageSlider3];
+  
+	function nextSlide() {
+	  if (!transitioning) {
+		transitioning = true;
+		currentIndex = (currentIndex + 1) % images.length;
+		setTimeout(() => transitioning = false, 500); 
+	  }
+	}
+  
+	function prevSlide() {
+	  if (!transitioning) {
+		transitioning = true;
+		currentIndex = (currentIndex - 1 + images.length) % images.length;
+		setTimeout(() => transitioning = false, 500); 
+	  }
+	}
+  </script>
+  
+  <div class="relative w-full overflow-hidden flex h-56">
+	<div class="flex transition-transform duration-500" style="transform: translateX(-{currentIndex * 100}%);">
+	  {#each images as image}
+		<div class="w-full flex-shrink-0">
+		  <img src={image} alt="Carousel Image" class="w-full object-cover" />
+		</div>
+	  {/each}
+	</div>
+	<button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2" on:click={prevSlide}>
+	  &#10094;
+	</button>
+	<button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2" on:click={nextSlide}>
+	  &#10095;
+	</button>
+  </div>
+  
 
